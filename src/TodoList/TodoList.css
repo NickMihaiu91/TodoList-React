@@ -18,3 +18,7 @@
     border: 2px solid #003399;
     cursor: pointer;
 }
+
+.todoListMain .errorContainer>p {
+    margin-top: 0;
+}

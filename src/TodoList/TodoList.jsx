@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './TodoList.css';
 
-import TodoItems from '../TodoItems/TodoItems'; 
+import TodoItems from '../TodoItems/TodoItems';
 
 class TodoList extends Component {
     constructor(props) {
@@ -12,6 +12,14 @@ class TodoList extends Component {
     }
 
     addItem(e) {
+        e.preventDefault();
+
+        if (!this._inputElement.value) {
+            return this.setState({
+                showEmptyInputErrorMessage: true
+            });
+        }
+
         var itemArray = this.state.items;
 
         itemArray.push(
@@ -22,14 +30,13 @@ class TodoList extends Component {
         );
 
         this.setState({
-            items: itemArray
+            items: itemArray,
+            showEmptyInputErrorMessage: false
         });
 
         localStorage.setItem('todo-items', JSON.stringify(itemArray));
 
         this._inputElement.value = "";
-
-        e.preventDefault();
     }
 
     render() {
@@ -42,6 +49,11 @@ class TodoList extends Component {
                         <button type="submit">add</button>
                     </form>
                 </div>
+                {this.state.showEmptyInputErrorMessage &&
+                    <div className="errorContainer">
+                        <p className="error">Come on... don't leave it empty :)</p>
+                    </div>
+                }
                 <TodoItems entries={this.state.items} />
             </div>
         );

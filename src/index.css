@@ -4,3 +4,8 @@ body {
   background-color: #66CCFF;
   font-family: sans-serif;
 }
+
+.error {
+  color: rgba(208, 23, 23, 0.87);
+  font-weight: bold;
+}
