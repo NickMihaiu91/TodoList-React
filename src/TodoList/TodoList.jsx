@@ -39,6 +39,18 @@ class TodoList extends Component {
         this._inputElement.value = "";
     }
 
+    removeItem(key) {
+        var itemArray = this.state.items;
+
+        itemArray.splice(itemArray.findIndex((item) => item.key === key), 1);
+
+        this.setState({
+            items: itemArray
+        });
+
+        localStorage.setItem('todo-items', JSON.stringify(itemArray));
+    }
+
     render() {
         return (
             <div className="todoListMain">
@@ -54,7 +66,7 @@ class TodoList extends Component {
                         <p className="error">Come on... don't leave it empty :)</p>
                     </div>
                 }
-                <TodoItems entries={this.state.items} />
+                <TodoItems entries={this.state.items} onRemoveItem={(key) => this.removeItem(key)} />
             </div>
         );
     }
