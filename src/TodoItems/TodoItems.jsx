@@ -10,7 +10,10 @@ class TodoItems extends Component {
 
     render() {
         var todoEntries = this.props.entries,
-            listItems = todoEntries.map((item) => <li key={item.key}><label>{item.text}</label><i className="removeItem" onClick={() => this.onRemoveItemClicked(item.key)}>X</i></li>);
+            listItems;
+        
+        todoEntries.sort((a, b) => b.key - a.key);
+        listItems = todoEntries.map((item) => <li key={item.key}><label>{item.text}</label><i className="removeItem" onClick={() => this.onRemoveItemClicked(item.key)}>X</i></li>);
 
         return (
             <ul className="theList">
